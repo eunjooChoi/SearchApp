@@ -9,9 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        List {
-            ArticleView()
-            ArticleView()
+        GeometryReader { geometryproxy in
+            VStack {
+                Spacer().frame(width: geometryproxy.size.width, height: geometryproxy.size.height / 4, alignment: .center)
+                
+                SearchMainView()
+                    .padding(.bottom, 20)
+                
+                Spacer()
+                
+                Text("@Chenjoo")
+                    .font(.system(size: 12))
+                    .fontWeight(.heavy)
+            }
         }
     }
 }
