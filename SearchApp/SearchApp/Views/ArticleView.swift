@@ -10,6 +10,8 @@ import SwiftUI
 struct ArticleView: View {
     var body: some View {
         HStack {
+            Spacer()
+            
             Image(systemName: "photo.on.rectangle.angled")
                 .foregroundColor(.gray)
                 .frame(width: 70, height: 70)
