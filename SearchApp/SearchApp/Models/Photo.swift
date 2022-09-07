@@ -1,5 +1,5 @@
 //
-//  Image.swift
+//  Photo.swift
 //  SearchApp
 //
 //  Created by 최은주 on 2022/09/06.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Image: Codable {
+struct Photo: Codable {
     var title: String
     var link: String
     var thumbnail: String
