@@ -11,14 +11,31 @@ struct ResultListView: View {
     @Binding var keyword: String
     
     var body: some View {
-        NavigationView {
+        TabView {
             List {
                 ArticleView()
+            }
+            .tabItem {
+                Label("Blog", systemImage: "book.circle")
+            }
+            
+            List {
                 ArticleView()
             }
-            .listStyle(.inset)
-            .navigationTitle(keyword)
+            .tabItem {
+                Label("News", systemImage: "newspaper.circle")
+            }
+            
+            List {
+                ArticleView()
+            }
+            .tabItem {
+                Label("Image", systemImage: "photo.circle")
+            }
         }
+        .listStyle(.inset)
+        .navigationTitle(keyword)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
