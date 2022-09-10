@@ -17,9 +17,9 @@ struct SearchBoxView: View {
                 .frame(height: 50)
                 .padding(.leading, 10)
             
-            Button {
-                //TODO: 검색 API 조회
-            } label: {
+            Button(action: {
+                // TODO: keyword 빈 값인지 확인 -> 알럿 노출
+            }, label: {
                 NavigationLink(destination: ResultListView(keyword: $keyword)) {
                     Label("Search", systemImage: "magnifyingglass")
                         .labelStyle(.iconOnly)
@@ -27,7 +27,7 @@ struct SearchBoxView: View {
                         .foregroundColor(.orange)
                         .padding()
                 }
-            }
+            })
         }
         .border(.orange, width: 2)
         .cornerRadius(3.0)
