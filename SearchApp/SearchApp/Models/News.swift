@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct News: Codable {
+struct News: Codable, Hashable {
     var title: String
     var link: String
     var description: String
