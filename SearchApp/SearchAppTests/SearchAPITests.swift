@@ -13,24 +13,26 @@ class SearchAPITests: XCTestCase {
     var sut: SearchAPI!
     
     override func setUpWithError() throws {
-        mockSession = URLSessionSpy()
+        mockSession = URLSessionSpy(searchType: .blog)
     }
     
     func test_search_blog_success() {
         sut = SearchAPI.init(searchType: .blog, session: mockSession)
         sut.requestSearchResult(startIndex: 1, keyword: "여행")
-        XCTAssertNotNil(sut.blogs)
+        XCTAssertTrue(sut.blogs.count != 0)
     }
     
     func test_search_news_success() {
+        mockSession = URLSessionSpy(searchType: .news)
         sut = SearchAPI.init(searchType: .news, session: mockSession)
         sut.requestSearchResult(startIndex: 1, keyword: "여행")
-        XCTAssertNotNil(sut.news)
+        XCTAssertTrue(sut.news.count != 0)
     }
     
     func test_search_image_success() {
+        mockSession = URLSessionSpy(searchType: .image)
         sut = SearchAPI.init(searchType: .image, session: mockSession)
         sut.requestSearchResult(startIndex: 1, keyword: "여행")
-        XCTAssertNotNil(sut.photos)
+        XCTAssertTrue(sut.photos.count != 0)
     }
 }
