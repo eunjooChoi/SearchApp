@@ -8,6 +8,12 @@
 import Foundation
 import SwiftUI
 
+protocol URLSessionProtocol {
+    func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
+}
+
+extension URLSession: URLSessionProtocol {}
+
 class SearchAPI: ObservableObject {
     @Published var blogs: [Blog] = []
     @Published var news: [News] = []
@@ -30,15 +36,17 @@ class SearchAPI: ObservableObject {
     }
     
     let searchType: SearchType
+    let session: URLSessionProtocol
     
-    init(searchType: SearchType) {
+    init(searchType: SearchType, session: URLSessionProtocol = URLSession.shared) {
         self.searchType = searchType
+        self.session = session
     }
     
-    func requestSearchResult(startIndex: Int = 1, keyword: String) {
+    func requestSearchResult(startIndex: Int, keyword: String) {
         guard let urlRequest = self.createURLRequest(keyword: keyword) else { return }
         
-        URLSession.shared.dataTask(with: urlRequest) {data, response, error in
+        session.dataTask(with: urlRequest) {data, response, error in
             // TODO: 에러 처리
             
             guard let data = data else { return }
