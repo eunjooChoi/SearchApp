@@ -50,23 +50,21 @@ class SearchAPI: ObservableObject {
             // TODO: 에러 처리
             
             guard let data = data else { return }
-
+            
             let decoder = JSONDecoder()
             
-            DispatchQueue.main.async {
-                switch self.searchType {
-                case .blog:
-                    if let result = try? decoder.decode(APIResult<Blog>.self, from: data) {
-                        self.blogs.append(contentsOf: result.items)
-                    }
-                case .news:
-                    if let result = try? decoder.decode(APIResult<News>.self, from: data) {
-                        self.news.append(contentsOf: result.items)
-                    }
-                case .image:
-                    if let result = try? decoder.decode(APIResult<Photo>.self, from: data) {
-                        self.photos.append(contentsOf: result.items)
-                    }
+            switch self.searchType {
+            case .blog:
+                if let result = try? decoder.decode(APIResult<Blog>.self, from: data) {
+                    self.blogs.append(contentsOf: result.items)
+                }
+            case .news:
+                if let result = try? decoder.decode(APIResult<News>.self, from: data) {
+                    self.news.append(contentsOf: result.items)
+                }
+            case .image:
+                if let result = try? decoder.decode(APIResult<Photo>.self, from: data) {
+                    self.photos.append(contentsOf: result.items)
                 }
             }
         }.resume()

@@ -13,7 +13,7 @@ class URLSessionSpy: URLSessionProtocol {
     var searchType: SearchType
     var sessionDataTask: URLSessionDataTaskSpy?
 
-    init(shouldRequestSuccess: Bool = true, searchType: SearchType = .blog) {
+    init(shouldRequestSuccess: Bool = true, searchType: SearchType) {
         self.shouldRequestSuccess = shouldRequestSuccess
         self.searchType = searchType
     }

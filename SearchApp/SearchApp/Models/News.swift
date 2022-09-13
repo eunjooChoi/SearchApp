@@ -11,5 +11,5 @@ struct News: Codable, Hashable {
     var title: String
     var link: String
     var description: String
-    var pubdate: Date
+    var pubdate: String
 }
