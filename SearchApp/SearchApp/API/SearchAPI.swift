@@ -35,15 +35,14 @@ class SearchAPI: ObservableObject {
         }
     }
     
-    let searchType: SearchType
+    var searchType: SearchType = .blog
     let session: URLSessionProtocol
     
-    init(searchType: SearchType, session: URLSessionProtocol = URLSession.shared) {
-        self.searchType = searchType
+    init(session: URLSessionProtocol = URLSession.shared) {
         self.session = session
     }
     
-    func requestSearchResult(startIndex: Int, keyword: String) {
+    func requestSearchResult(keyword: String) {
         guard let urlRequest = self.createURLRequest(keyword: keyword) else { return }
         
         session.dataTask(with: urlRequest) {data, response, error in
@@ -53,20 +52,23 @@ class SearchAPI: ObservableObject {
             
             let decoder = JSONDecoder()
             
-            switch self.searchType {
-            case .blog:
-                if let result = try? decoder.decode(APIResult<Blog>.self, from: data) {
-                    self.blogs.append(contentsOf: result.items)
-                }
-            case .news:
-                if let result = try? decoder.decode(APIResult<News>.self, from: data) {
-                    self.news.append(contentsOf: result.items)
-                }
-            case .image:
-                if let result = try? decoder.decode(APIResult<Photo>.self, from: data) {
-                    self.photos.append(contentsOf: result.items)
+            DispatchQueue.main.async {
+                switch self.searchType {
+                case .blog:
+                    if let result = try? decoder.decode(APIResult<Blog>.self, from: data) {
+                        self.blogs = result.items
+                    }
+                case .news:
+                    if let result = try? decoder.decode(APIResult<News>.self, from: data) {
+                        self.news = result.items
+                    }
+                case .image:
+                    if let result = try? decoder.decode(APIResult<Photo>.self, from: data) {
+                        self.photos = result.items
+                    }
                 }
             }
+            
         }.resume()
     }
     

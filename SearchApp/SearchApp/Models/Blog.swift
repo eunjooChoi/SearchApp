@@ -13,4 +13,5 @@ struct Blog: Codable, Hashable {
     var description: String
     var bloggername: String
     var bloggerlink: String
+    var postdate: String        //"postdate":"20220912"
 }
