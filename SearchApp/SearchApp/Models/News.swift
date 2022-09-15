@@ -11,5 +11,14 @@ struct News: Codable, Hashable {
     var title: String
     var link: String
     var description: String
-    var pubdate: String
+    var pubDate: String     // "pubDate":"Mon, 12 Sep 2022 15:30:00 +0900"
+}
+
+extension Date {
+    var stringValue: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YY/MM/dd"
+        
+        return dateFormatter.string(from: self)
+    }
 }

@@ -20,7 +20,7 @@ struct SearchBoxView: View {
             Button(action: {
                 // TODO: keyword 빈 값인지 확인 -> 알럿 노출
             }, label: {
-                NavigationLink(destination: ResultListView(keyword: $keyword)) {
+                NavigationLink(destination: ResultMainView(keyword: $keyword)) {
                     Label("Search", systemImage: "magnifyingglass")
                         .labelStyle(.iconOnly)
                         .imageScale(.medium)
