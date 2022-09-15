@@ -17,22 +17,51 @@ class SearchAPITests: XCTestCase {
     }
     
     func test_search_blog_success() {
-        sut = SearchAPI.init(searchType: .blog, session: mockSession)
-        sut.requestSearchResult(startIndex: 1, keyword: "여행")
-        XCTAssertTrue(sut.blogs.count != 0)
+        sut = SearchAPI(session: mockSession)
+        sut.requestSearchResult(keyword: "여행")
+        
+        let expectation = expectation(description: "APIDone")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+            XCTAssertTrue(self.sut.blogs.count != 0)
+            
+            expectation.fulfill()
+        })
+        
+        wait(for: [expectation], timeout: 2.0)
     }
     
     func test_search_news_success() {
         mockSession = URLSessionSpy(searchType: .news)
-        sut = SearchAPI.init(searchType: .news, session: mockSession)
-        sut.requestSearchResult(startIndex: 1, keyword: "여행")
-        XCTAssertTrue(sut.news.count != 0)
+        sut = SearchAPI(session: mockSession)
+        sut.searchType = .news
+        sut.requestSearchResult(keyword: "여행")
+        
+        let expectation = expectation(description: "APIDone")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+            XCTAssertTrue(self.sut.news.count != 0)
+            
+            expectation.fulfill()
+        })
+        
+        wait(for: [expectation], timeout: 2.0)
     }
     
     func test_search_image_success() {
         mockSession = URLSessionSpy(searchType: .image)
-        sut = SearchAPI.init(searchType: .image, session: mockSession)
-        sut.requestSearchResult(startIndex: 1, keyword: "여행")
-        XCTAssertTrue(sut.photos.count != 0)
+        sut = SearchAPI(session: mockSession)
+        sut.searchType = .image
+        sut.requestSearchResult(keyword: "여행")
+        
+        let expectation = expectation(description: "APIDone")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+            XCTAssertTrue(self.sut.photos.count != 0)
+            
+            expectation.fulfill()
+        })
+        
+        wait(for: [expectation], timeout: 2.0)
     }
 }
