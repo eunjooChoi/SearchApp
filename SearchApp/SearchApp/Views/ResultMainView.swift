@@ -26,8 +26,7 @@ struct ResultMainView: View {
                 }
                 .tag(SearchType.news)
             
-            List {
-            }
+            ImageListView(keyword: $keyword, photos: $searchAPI.photos)
             .tabItem {
                 Label("Image", systemImage: "photo.circle")
             }
