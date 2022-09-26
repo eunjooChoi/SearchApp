@@ -20,7 +20,7 @@ struct ImageListView: View {
                     NavigationLink {
                         // TODO: 이미지 크게 보기 _ 제목 노출
                     } label: {
-                        ImageRow(photo: result)
+                        ImageRow(keyword: $keyword, photo: result)
                     }
                 }
             }

@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct BlogRow: View {
+    @Binding var keyword: String
     var blog: Blog
+    
     var body: some View {
+        let highlightKeyword = HighlightKeyword(keyword: keyword)
+        
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text(blog.title)
+                Text(highlightKeyword.highlighting(string: blog.title))
                     .font(.headline)
                     .fontWeight(.bold)
                 
-                Text(blog.description)
+                Text(highlightKeyword.highlighting(string: blog.description))
                     .font(.system(size: 15.0))
                     .fontWeight(.light)
                     .lineLimit(2)
@@ -52,7 +56,7 @@ struct BlogRow_Previews: PreviewProvider {
                         bloggerlink: "link",
                         postdate: "date")
         
-        BlogRow(blog: blog)
+        BlogRow(keyword: .constant("검색어"), blog: blog)
             .previewLayout(.fixed(width: 300, height: 100))
     }
 }

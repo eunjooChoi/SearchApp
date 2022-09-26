@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct ImageRow: View {
+    @Binding var keyword: String
     let photo: Photo
     
     var body: some View {
+        let highlightKeyword = HighlightKeyword(keyword: keyword)
+        
         VStack {
             AsyncImage(url: URL(string: photo.thumbnail)) { photo in
                 photo.image != nil ? photo.image : Image(systemName: "photo.fill")
@@ -18,7 +21,7 @@ struct ImageRow: View {
             .frame(width: 150, height: 150, alignment: .center)
             .cornerRadius(10)
             
-            Text(photo.title)
+            Text(highlightKeyword.highlighting(string: photo.title))
                 .fontWeight(.thin)
                 .lineLimit(2)
                 .font(.system(size: 15.0))
@@ -36,6 +39,6 @@ struct ImageRow_Previews: PreviewProvider {
                           sizewidth: "size",
                           sizeheight: "size")
         
-        ImageRow(photo: photo)
+        ImageRow(keyword: .constant("검색어"), photo: photo)
     }
 }

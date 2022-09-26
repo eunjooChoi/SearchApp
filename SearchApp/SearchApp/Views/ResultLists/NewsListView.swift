@@ -17,7 +17,7 @@ struct NewsListView: View {
                 NavigationLink {
                     // TODO: WebView 연결
                 } label: {
-                    NewsRow(news: result)
+                    NewsRow(keyword: $keyword, news: result)
                 }
             }
         }
