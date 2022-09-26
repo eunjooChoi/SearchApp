@@ -17,7 +17,7 @@ struct BlogListView: View {
                 NavigationLink {
                     // TODO: WebView 연결
                 } label: {
-                    BlogRow(blog: result)
+                    BlogRow(keyword: $keyword, blog: result)
                 }
             }
         }
