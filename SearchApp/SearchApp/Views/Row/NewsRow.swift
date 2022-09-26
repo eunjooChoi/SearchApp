@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct NewsRow: View {
+    @Binding var keyword: String
     var news: News
+    
     var body: some View {
+        let highlightKeyword = HighlightKeyword(keyword: keyword)
+        
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text(news.title)
+                Text(highlightKeyword.highlighting(string: news.title))
                     .font(.headline)
                     .fontWeight(.bold)
                 
-                Text(news.description)
+                Text(highlightKeyword.highlighting(string: news.description))
                     .font(.system(size: 15.0))
                     .fontWeight(.light)
                     .lineLimit(2)
@@ -34,10 +38,11 @@ struct NewsRow: View {
 
 struct NewsRow_Previews: PreviewProvider {
     static var previews: some View {
-        NewsRow(news: News(title: "title",
-                            link: "link",
-                            description: "description",
-                            pubDate: "date"))
-            .previewLayout(.fixed(width: 300, height: 100))
+        NewsRow(keyword: .constant("검색어"), news: News(title: "title",
+                           link: "link",
+                           description: "description",
+                           pubDate: "date"))
+        .previewLayout(.fixed(width: 300, height: 100))
     }
 }
+
