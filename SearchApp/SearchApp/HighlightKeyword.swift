@@ -15,9 +15,7 @@ class HighlightKeyword {
     }
     
     func highlighting(string: String) -> AttributedString {
-        let removedTagString = removeBTag(string: string)
-        
-        var attributedString = AttributedString(removedTagString)
+        var attributedString = AttributedString(string)
         let ranges = attributedString.ranges(of: keyword)
         
         for range in ranges {
@@ -25,11 +23,6 @@ class HighlightKeyword {
         }
         
         return attributedString
-    }
-    
-    private func removeBTag(string: String) -> String {
-        return string.replacingOccurrences(of: "<b>", with: "")
-            .replacingOccurrences(of: "</b>", with: "")
     }
 }
 
@@ -45,5 +38,21 @@ private extension AttributedString {
         }
         
         return ranges
+    }
+}
+
+
+extension String {
+    init?(htmlEncodedString: String) {
+        guard let data = htmlEncodedString.data(using: .utf8) else { return nil }
+        
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        
+        guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else { return nil }
+        
+        self.init(attributedString.string)
     }
 }
