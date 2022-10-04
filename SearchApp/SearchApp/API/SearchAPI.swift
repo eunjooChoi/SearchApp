@@ -20,6 +20,8 @@ class SearchAPI: ObservableObject {
     @Published var photos: [Photo] = []
     
     private let baseURL = "https://openapi.naver.com/v1/search/"
+    private var keyword: String = ""
+    private var page = 1
     
     private enum ClientKey: String {
         case id = "X-Naver-Client-Id"
@@ -42,8 +44,9 @@ class SearchAPI: ObservableObject {
         self.session = session
     }
     
-    func requestSearchResult(keyword: String) {
-        guard let urlRequest = self.createURLRequest(keyword: keyword) else { return }
+    func requestSearchResult(startIndex: Int = 1, keyword: String) {
+        self.keyword = keyword
+        guard let urlRequest = self.createURLRequest(startIndex: startIndex, keyword: keyword) else { return }
         
         session.dataTask(with: urlRequest) {data, response, error in
             // TODO: 에러 처리
@@ -56,15 +59,27 @@ class SearchAPI: ObservableObject {
                 switch self.searchType {
                 case .blog:
                     if let result = try? decoder.decode(APIResult<Blog>.self, from: data) {
-                        self.blogs = result.items
+                        if startIndex == 1 {
+                            self.blogs.removeAll()
+                        }
+                        
+                        self.blogs.append(contentsOf: result.items)
                     }
                 case .news:
                     if let result = try? decoder.decode(APIResult<News>.self, from: data) {
-                        self.news = result.items
+                        if startIndex == 1 {
+                            self.news.removeAll()
+                        }
+                        
+                        self.news.append(contentsOf: result.items)
                     }
                 case .image:
                     if let result = try? decoder.decode(APIResult<Photo>.self, from: data) {
-                        self.photos = result.items
+                        if startIndex == 1 {
+                            self.photos.removeAll()
+                        }
+                        
+                        self.photos.append(contentsOf: result.items)
                     }
                 }
             }
@@ -72,7 +87,12 @@ class SearchAPI: ObservableObject {
         }.resume()
     }
     
-    private func createURLRequest(startIndex: Int = 1, keyword: String) -> URLRequest? {
+    func loadMoreContents() {
+        self.page += 1
+        self.requestSearchResult(startIndex: self.page, keyword: self.keyword)
+    }
+    
+    private func createURLRequest(startIndex: Int, keyword: String) -> URLRequest? {
         var urlComponents = URLComponents(string: baseURL + searchType.rawValue)
         
         let query: URLQueryItem = URLQueryItem(name: "query", value: keyword)

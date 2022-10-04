@@ -10,6 +10,7 @@ import SwiftUI
 struct BlogListView: View {
     @Binding var keyword: String
     @Binding var blogs: [Blog]
+    let searchAPI: SearchAPI
     
     var body: some View {
         List {
@@ -19,6 +20,13 @@ struct BlogListView: View {
                 } label: {
                     BlogRow(keyword: $keyword, blog: result)
                 }
+                .onAppear {
+                    guard let index = blogs.firstIndex(where: {$0.title == result.title}) else { return }
+                    
+                    if index == blogs.count - 1 {
+                        searchAPI.loadMoreContents()
+                    }
+                }
             }
         }
     }
@@ -26,6 +34,6 @@ struct BlogListView: View {
 
 struct BlogListView_Previews: PreviewProvider {
     static var previews: some View {
-        BlogListView(keyword: .constant("keyword"), blogs: .constant([]))
+        BlogListView(keyword: .constant("keyword"), blogs: .constant([]), searchAPI: SearchAPI())
     }
 }
