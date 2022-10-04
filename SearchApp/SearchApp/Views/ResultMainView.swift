@@ -14,19 +14,19 @@ struct ResultMainView: View {
     
     var body: some View {
         TabView(selection: $tabSelection) {
-            BlogListView(keyword: $keyword, blogs: $searchAPI.blogs)
+            BlogListView(keyword: $keyword, blogs: $searchAPI.blogs, searchAPI: searchAPI)
                 .tabItem {
                     Label("Blog", systemImage: "book.circle")
                 }
                 .tag(SearchType.blog)
             
-            NewsListView(keyword: $keyword, news: $searchAPI.news)
+            NewsListView(keyword: $keyword, news: $searchAPI.news, searchAPI: searchAPI)
                 .tabItem {
                     Label("News", systemImage: "newspaper.circle")
                 }
                 .tag(SearchType.news)
             
-            ImageListView(keyword: $keyword, photos: $searchAPI.photos)
+            ImageListView(keyword: $keyword, photos: $searchAPI.photos, searchAPI: searchAPI)
             .tabItem {
                 Label("Image", systemImage: "photo.circle")
             }
