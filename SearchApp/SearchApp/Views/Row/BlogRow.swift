@@ -50,7 +50,7 @@ struct BlogRow: View {
 struct BlogRow_Previews: PreviewProvider {
     static var previews: some View {
         let blog = Blog(title: "title",
-                        link: "link",
+                        link: URL(string: "www.naver.com")!,
                         description: "description",
                         bloggername: "name",
                         bloggerlink: "link",

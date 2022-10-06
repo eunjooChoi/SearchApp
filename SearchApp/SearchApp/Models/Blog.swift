@@ -13,7 +13,7 @@ struct Blog: Codable, Hashable {
     }
     
     var title: String
-    var link: String
+    var link: URL
     var description: String
     var bloggername: String
     var bloggerlink: String
@@ -27,7 +27,7 @@ extension Blog {
         let decodedTitle = try container.decode(String.self, forKey: .title)
         self.title = String(htmlEncodedString: decodedTitle) ?? ""
         
-        self.link = try container.decode(String.self, forKey: .link)
+        self.link = try container.decode(URL.self, forKey: .link)
         
         let decodedDescription = try container.decode(String.self, forKey: .description)
         self.description = String(htmlEncodedString: decodedDescription) ?? ""

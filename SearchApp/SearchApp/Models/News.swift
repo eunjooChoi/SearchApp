@@ -13,7 +13,7 @@ struct News: Codable, Hashable {
     }
     
     var title: String
-    var link: String
+    var link: URL
     var description: String
     var pubDate: String     // "pubDate":"Mon, 12 Sep 2022 15:30:00 +0900"
 }
@@ -25,7 +25,7 @@ extension News {
         let decodedTitle = try container.decode(String.self, forKey: .title)
         self.title = String(htmlEncodedString: decodedTitle) ?? ""
         
-        self.link = try container.decode(String.self, forKey: .link)
+        self.link = try container.decode(URL.self, forKey: .link)
         
         let decodedDescription = try container.decode(String.self, forKey: .description)
         self.description = String(htmlEncodedString: decodedDescription) ?? ""
