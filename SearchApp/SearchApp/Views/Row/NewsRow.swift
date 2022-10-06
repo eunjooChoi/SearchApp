@@ -39,7 +39,7 @@ struct NewsRow: View {
 struct NewsRow_Previews: PreviewProvider {
     static var previews: some View {
         NewsRow(keyword: .constant("검색어"), news: News(title: "title",
-                           link: "link",
+                                                      link: URL(string: "www.naver.com")!,
                            description: "description",
                            pubDate: "date"))
         .previewLayout(.fixed(width: 300, height: 100))
