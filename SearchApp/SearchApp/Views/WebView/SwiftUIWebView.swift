@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import WebKit
  
 struct SwiftUIWebView: UIViewControllerRepresentable {
     var url: URL

@@ -16,7 +16,6 @@ struct NewsListView: View {
         List {
             ForEach(news, id: \.self) { result in
                 NavigationLink {
-                    // TODO: WebView 연결
                     SwiftUIWebView(url: result.link)
                 } label: {
                     NewsRow(keyword: $keyword, news: result)
