@@ -17,7 +17,7 @@ struct BlogListView: View {
             ForEach(blogs, id: \.self) { result in
                 NavigationLink {
                     // TODO: WebView 연결
-                    WebView(url: result.link)
+                    SwiftUIWebView(url: result.link)
                 } label: {
                     BlogRow(keyword: $keyword, blog: result)
                 }

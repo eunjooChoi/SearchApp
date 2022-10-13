@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WebViewController" customModule="SearchApp" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="Coa-iL-IMi" id="ssQ-W5-nV0"/>
+                <outlet property="webview" destination="52b-5q-iCi" id="vwh-C0-PGa"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Coa-iL-IMi">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZT5-qp-fka">
+                    <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                    <items>
+                        <barButtonItem title="back" image="chevron.left" catalog="system" id="ywi-On-v9d">
+                            <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <action selector="didSelectBack:" destination="-1" id="kQT-11-YGg"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ndj-w0-1Rg"/>
+                        <barButtonItem title="forward" image="chevron.right" catalog="system" id="W3Z-XO-ryb">
+                            <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <action selector="didSelectForward:" destination="-1" id="M5i-IK-GQ7"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="IXu-zt-gJc"/>
+                        <barButtonItem title="refresh" image="arrow.clockwise" catalog="system" id="yJ3-a4-zPo">
+                            <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <action selector="didSelectRefresh:" destination="-1" id="Vsh-F3-GhB"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                    <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </toolbar>
+                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="52b-5q-iCi">
+                    <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <wkWebViewConfiguration key="configuration">
+                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                        <wkPreferences key="preferences"/>
+                    </wkWebViewConfiguration>
+                </wkWebView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="9Ut-Uw-Q6M"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="ZT5-qp-fka" firstAttribute="trailing" secondItem="9Ut-Uw-Q6M" secondAttribute="trailing" id="E1h-Da-2l1"/>
+                <constraint firstItem="ZT5-qp-fka" firstAttribute="top" secondItem="52b-5q-iCi" secondAttribute="bottom" id="S5x-CG-VaT"/>
+                <constraint firstItem="9Ut-Uw-Q6M" firstAttribute="bottom" secondItem="ZT5-qp-fka" secondAttribute="bottom" id="SwL-m8-7xN"/>
+                <constraint firstItem="ZT5-qp-fka" firstAttribute="leading" secondItem="9Ut-Uw-Q6M" secondAttribute="leading" id="kpk-cp-vXM"/>
+                <constraint firstItem="52b-5q-iCi" firstAttribute="leading" secondItem="9Ut-Uw-Q6M" secondAttribute="leading" id="nWh-1V-bhH"/>
+                <constraint firstItem="52b-5q-iCi" firstAttribute="top" secondItem="9Ut-Uw-Q6M" secondAttribute="top" id="qVY-Iz-pgL"/>
+                <constraint firstItem="9Ut-Uw-Q6M" firstAttribute="trailing" secondItem="52b-5q-iCi" secondAttribute="trailing" id="r19-wL-LpE"/>
+            </constraints>
+            <point key="canvasLocation" x="506" y="121"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
