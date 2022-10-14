@@ -19,7 +19,7 @@ struct ImageListView: View {
             LazyVGrid(columns: layout) {
                 ForEach(photos, id: \.self) { result in
                     NavigationLink {
-                        // TODO: 이미지 크게 보기 _ 제목 노출
+                        ImageDetail(photo: result)
                     } label: {
                         ImageRow(keyword: $keyword, photo: result)
                     }

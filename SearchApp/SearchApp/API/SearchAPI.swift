@@ -89,7 +89,8 @@ class SearchAPI: ObservableObject {
     
     func loadMoreContents() {
         self.page += 1
-        self.requestSearchResult(startIndex: self.page, keyword: self.keyword)
+        let startIndex = self.page * 10 + 1
+        self.requestSearchResult(startIndex: startIndex, keyword: self.keyword)
     }
     
     private func createURLRequest(startIndex: Int, keyword: String) -> URLRequest? {
