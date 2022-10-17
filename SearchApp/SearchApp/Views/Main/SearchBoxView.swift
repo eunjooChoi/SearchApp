@@ -9,24 +9,32 @@ import SwiftUI
 
 struct SearchBoxView: View {
     @State private var keyword: String = ""
+    @State private var isActiveResultView: Bool = false
     
     var body: some View {
         HStack(spacing: 0) {
-            //TODO: Enter - 검색 API 조회
             TextField("Input Search Text", text: $keyword)
                 .frame(height: 50)
                 .padding(.leading, 10)
-            
+                .disableAutocorrection(true)        // 단어 자동수정 방지
+                .submitLabel(.search)
+                .onSubmit {
+                    isActiveResultView = true
+                }
+                
             Button(action: {
                 // TODO: keyword 빈 값인지 확인 -> 알럿 노출
+                isActiveResultView = true
             }, label: {
-                NavigationLink(destination: ResultMainView(keyword: $keyword)) {
-                    Label("Search", systemImage: "magnifyingglass")
-                        .labelStyle(.iconOnly)
-                        .imageScale(.medium)
-                        .foregroundColor(.orange)
-                        .padding()
-                }
+                Label("Search", systemImage: "magnifyingglass")
+                    .labelStyle(.iconOnly)
+                    .imageScale(.medium)
+                    .foregroundColor(.orange)
+                    .padding()
+            })
+            
+            NavigationLink("", isActive: $isActiveResultView, destination: {
+                ResultMainView(keyword: $keyword)
             })
         }
         .border(.orange, width: 2)
