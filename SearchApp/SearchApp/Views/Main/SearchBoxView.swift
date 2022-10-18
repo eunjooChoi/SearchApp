@@ -9,7 +9,10 @@ import SwiftUI
 
 struct SearchBoxView: View {
     @State private var keyword: String = ""
-    @State private var isActiveResultView: Bool = false
+    @State private var shouldShowResultView: Bool = false
+    @State private var shouldShowAlert: Bool = false
+    
+    private let keywordChecker: SearchKeywordChecker = SearchKeywordChecker()
     
     var body: some View {
         HStack(spacing: 0) {
@@ -19,12 +22,15 @@ struct SearchBoxView: View {
                 .disableAutocorrection(true)        // 단어 자동수정 방지
                 .submitLabel(.search)
                 .onSubmit {
-                    isActiveResultView = true
+                    let isAvailable = keywordChecker.checkKeywordAvailable(keyword: keyword)
+                    shouldShowResultView = isAvailable
+                    shouldShowAlert = !shouldShowResultView
                 }
-                
+            
             Button(action: {
-                // TODO: keyword 빈 값인지 확인 -> 알럿 노출
-                isActiveResultView = true
+                let isAvailable = keywordChecker.checkKeywordAvailable(keyword: keyword)
+                shouldShowResultView = isAvailable
+                shouldShowAlert = !shouldShowResultView
             }, label: {
                 Label("Search", systemImage: "magnifyingglass")
                     .labelStyle(.iconOnly)
@@ -33,15 +39,17 @@ struct SearchBoxView: View {
                     .padding()
             })
             
-            NavigationLink("", isActive: $isActiveResultView, destination: {
+            NavigationLink("", isActive: $shouldShowResultView, destination: {
                 ResultMainView(keyword: $keyword)
             })
         }
         .border(.orange, width: 2)
         .cornerRadius(3.0)
         .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+        .alert("검색어를 입력하세요", isPresented: $shouldShowAlert, actions: {})
     }
 }
+
 
 struct SearchBoxView_Previews: PreviewProvider {
     static var previews: some View {
