@@ -21,6 +21,8 @@
 		7B3EEAEE28F7E9E700E1A3CC /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B3EEAED28F7E9E700E1A3CC /* WebViewController.xib */; };
 		7B3EEAF028F7EC8400E1A3CC /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3EEAEF28F7EC8400E1A3CC /* WebViewController.swift */; };
 		7B45617D28C05327008CC18D /* SearchMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B45617C28C05327008CC18D /* SearchMainView.swift */; };
+		7B56193428FEDD6600C226C1 /* SearchKeywordChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B56193328FEDD6600C226C1 /* SearchKeywordChecker.swift */; };
+		7B56193628FEE2E200C226C1 /* SearchKeywordCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B56193528FEE2E200C226C1 /* SearchKeywordCheckerTests.swift */; };
 		7B7A7BF528BF5046001E50FD /* NewsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A7BF428BF5046001E50FD /* NewsRow.swift */; };
 		7B88A56528EEE1A000B65ED3 /* SwiftUIWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B88A56428EEE1A000B65ED3 /* SwiftUIWebView.swift */; };
 		7B9BB47328E1E00100DEBE01 /* HighlightKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9BB47228E1E00100DEBE01 /* HighlightKeyword.swift */; };
@@ -76,6 +78,8 @@
 		7B3EEAED28F7E9E700E1A3CC /* WebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		7B3EEAEF28F7EC8400E1A3CC /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		7B45617C28C05327008CC18D /* SearchMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMainView.swift; sourceTree = "<group>"; };
+		7B56193328FEDD6600C226C1 /* SearchKeywordChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordChecker.swift; sourceTree = "<group>"; };
+		7B56193528FEE2E200C226C1 /* SearchKeywordCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordCheckerTests.swift; sourceTree = "<group>"; };
 		7B7A7BF428BF5046001E50FD /* NewsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRow.swift; sourceTree = "<group>"; };
 		7B88A56428EEE1A000B65ED3 /* SwiftUIWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIWebView.swift; sourceTree = "<group>"; };
 		7B9BB47228E1E00100DEBE01 /* HighlightKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightKeyword.swift; sourceTree = "<group>"; };
@@ -191,6 +195,7 @@
 				7BB7BA6028CF2CD600C698DD /* APIResults */,
 				7BAC470828D0888F009AB7B5 /* URLSessionDataTaskSpy.swift */,
 				7BAC470A28D0892B009AB7B5 /* URLSessionSpy.swift */,
+				7B56193528FEE2E200C226C1 /* SearchKeywordCheckerTests.swift */,
 			);
 			path = SearchAppTests;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 			children = (
 				7B45617C28C05327008CC18D /* SearchMainView.swift */,
 				7BF6492728C4C0E8002160E7 /* SearchBoxView.swift */,
+				7B56193328FEDD6600C226C1 /* SearchKeywordChecker.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -419,6 +425,7 @@
 				7B21F86E28C8DB2B00419E1B /* SearchAPI.swift in Sources */,
 				7B3EEAF028F7EC8400E1A3CC /* WebViewController.swift in Sources */,
 				7BB7BA5928CF2B8D00C698DD /* SearchType.swift in Sources */,
+				7B56193428FEDD6600C226C1 /* SearchKeywordChecker.swift in Sources */,
 				7B45617D28C05327008CC18D /* SearchMainView.swift in Sources */,
 				7B21F86B28C7786E00419E1B /* Photo.swift in Sources */,
 				7BCE44A028D60A6B00994810 /* ImageRow.swift in Sources */,
@@ -445,6 +452,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BAC470B28D0892B009AB7B5 /* URLSessionSpy.swift in Sources */,
+				7B56193628FEE2E200C226C1 /* SearchKeywordCheckerTests.swift in Sources */,
 				7B2419F928BF4C920023F715 /* SearchAPITests.swift in Sources */,
 				7BAC470928D0888F009AB7B5 /* URLSessionDataTaskSpy.swift in Sources */,
 			);
