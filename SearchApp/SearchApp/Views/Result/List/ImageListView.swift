@@ -10,7 +10,7 @@ import SwiftUI
 struct ImageListView: View {
     @Binding var keyword: String
     @Binding var photos: [Photo]
-    let searchAPI: SearchAPI
+    @EnvironmentObject var searchAPI: SearchAPI
     
     private let layout = [GridItem(.adaptive(minimum: 150))]
     
@@ -33,11 +33,13 @@ struct ImageListView: View {
                 }
             }
         }
+        .alert(searchAPI.errorMessage ?? "Error", isPresented: $searchAPI.hasError, actions: {})
     }
 }
 
 struct ImageListView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageListView(keyword: .constant("keyword"), photos: .constant([]), searchAPI: SearchAPI())
+        ImageListView(keyword: .constant("keyword"), photos: .constant([]))
+            .environmentObject(SearchAPI())
     }
 }

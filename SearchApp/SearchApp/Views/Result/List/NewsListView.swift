@@ -10,7 +10,7 @@ import SwiftUI
 struct NewsListView: View {
     @Binding var keyword: String
     @Binding var news: [News]
-    let searchAPI: SearchAPI
+    @EnvironmentObject var searchAPI: SearchAPI
     
     var body: some View {
         List {
@@ -29,11 +29,13 @@ struct NewsListView: View {
                 }
             }
         }
+        .alert(searchAPI.errorMessage ?? "Error!", isPresented: $searchAPI.hasError, actions: {})
     }
 }
 
 struct NewsListView_Previews: PreviewProvider {
     static var previews: some View {
-        NewsListView(keyword: .constant("keyword"), news: .constant([]), searchAPI: SearchAPI())
+        NewsListView(keyword: .constant("keyword"), news: .constant([]))
+            .environmentObject(SearchAPI())
     }
 }
