@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct SearchAppApp: App {
+    @StateObject private var searchAPI = SearchAPI()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(searchAPI)
         }
     }
 }

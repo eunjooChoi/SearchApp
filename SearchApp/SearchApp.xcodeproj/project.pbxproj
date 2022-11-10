@@ -232,8 +232,8 @@
 		7B7A7BF328BF502C001E50FD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7BA48D3028D2E781000FA056 /* Result */,
 				7BF6492628C4C0B6002160E7 /* Main */,
+				7BA48D3028D2E781000FA056 /* Result */,
 			);
 			path = Views;
 			sourceTree = "<group>";

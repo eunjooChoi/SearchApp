@@ -19,6 +19,9 @@ class SearchAPI: ObservableObject {
     @Published var news: [News] = []
     @Published var photos: [Photo] = []
     
+    @Published var hasError: Bool = false
+    @Published var errorMessage: String? = nil
+    
     private let baseURL = "https://openapi.naver.com/v1/search/"
     private var keyword: String = ""
     private var page = 1
@@ -45,17 +48,22 @@ class SearchAPI: ObservableObject {
     }
     
     func requestSearchResult(startIndex: Int = 1, keyword: String) {
+        self.hasError = false
         self.keyword = keyword
         guard let urlRequest = self.createURLRequest(startIndex: startIndex, keyword: keyword) else { return }
         
         session.dataTask(with: urlRequest) {data, response, error in
-            // TODO: 에러 처리
-            
-            guard let data = data else { return }
-            
-            let decoder = JSONDecoder()
-            
             DispatchQueue.main.async {
+                if let error = error {
+                    self.errorMessage = error.localizedDescription
+                    self.hasError = self.errorMessage != nil
+                    return
+                }
+                
+                guard let data = data else { return }
+                
+                let decoder = JSONDecoder()
+                
                 switch self.searchType {
                 case .blog:
                     if let result = try? decoder.decode(APIResult<Blog>.self, from: data) {
@@ -94,7 +102,7 @@ class SearchAPI: ObservableObject {
     }
     
     private func createURLRequest(startIndex: Int, keyword: String) -> URLRequest? {
-        var urlComponents = URLComponents(string: baseURL + searchType.rawValue)
+        var urlComponents = URLComponents(string: self.baseURL + self.searchType.rawValue)
         
         let query: URLQueryItem = URLQueryItem(name: "query", value: keyword)
         let start: URLQueryItem = URLQueryItem(name: "start", value: String(startIndex))

@@ -10,23 +10,23 @@ import SwiftUI
 struct ResultMainView: View {
     @Binding var keyword: String
     @State var tabSelection: SearchType = .blog
-    @StateObject private var searchAPI = SearchAPI()
+    @EnvironmentObject var searchAPI: SearchAPI
     
     var body: some View {
         TabView(selection: $tabSelection) {
-            BlogListView(keyword: $keyword, blogs: $searchAPI.blogs, searchAPI: searchAPI)
+            BlogListView(keyword: $keyword, blogs: $searchAPI.blogs)
                 .tabItem {
                     Label("Blog", systemImage: "book.circle")
                 }
                 .tag(SearchType.blog)
             
-            NewsListView(keyword: $keyword, news: $searchAPI.news, searchAPI: searchAPI)
+            NewsListView(keyword: $keyword, news: $searchAPI.news)
                 .tabItem {
                     Label("News", systemImage: "newspaper.circle")
                 }
                 .tag(SearchType.news)
             
-            ImageListView(keyword: $keyword, photos: $searchAPI.photos, searchAPI: searchAPI)
+            ImageListView(keyword: $keyword, photos: $searchAPI.photos)
             .tabItem {
                 Label("Image", systemImage: "photo.circle")
             }
@@ -48,5 +48,6 @@ struct ResultMainView: View {
 struct ResultMainView_Previews: PreviewProvider {
     static var previews: some View {
         ResultMainView(keyword: .constant("keyword"))
+            .environmentObject(SearchAPI())
     }
 }
